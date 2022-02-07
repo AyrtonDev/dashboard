@@ -1,4 +1,5 @@
 import { Flex, Button, useBoolean } from '@chakra-ui/react'
+import { Item } from 'framer-motion/types/components/Reorder/Item'
 import { useRouter } from 'next/router'
 import { tableBodyProps } from '../../types/user'
 import { ModalDelete } from '../modal/modalDelete'
@@ -59,7 +60,8 @@ export function TableBody({ user, index }: tableBodyProps) {
       <ModalDelete
         isOpen={openModalDelete}
         onClose={setModalDelete.off}
-        userId={index}
+        userId={user.id}
+        index={index}
       />
     </Flex>
   )

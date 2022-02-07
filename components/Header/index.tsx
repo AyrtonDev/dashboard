@@ -7,19 +7,26 @@ import {
   Text
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { destroyCookie } from 'nookies'
+import { destroyCookie, parseCookies } from 'nookies'
 import { useEffect, useState } from 'react'
 
 export function Header() {
+  const cookie = parseCookies()
   const route = useRouter()
-  const { toggleColorMode } = useColorMode()
+  const { toggleColorMode, setColorMode, colorMode } = useColorMode()
   const [title, setTitle] = useState('')
+  const theme = cookie['THEME']
 
   const logOut = () => {
     destroyCookie(undefined, 'STATUS')
-    localStorage.clear()
     route.reload()
   }
+
+  useEffect(() => {
+    if (theme && colorMode) {
+      setColorMode(theme)
+    }
+  }, [])
 
   useEffect(() => {
     if (route.pathname === '/dash') {
