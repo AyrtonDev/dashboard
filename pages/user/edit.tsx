@@ -2,7 +2,6 @@ import {
   Button,
   Flex,
   FormLabel,
-  Heading,
   Input,
   useToast
 } from '@chakra-ui/react'
@@ -53,7 +52,7 @@ export default function editUser() {
           isClosable: true
         })
       } else {
-        let newlist = list
+        let newlist = [...list]
         if (typeof index === 'number') {
           newlist[index] = user
           dispatch(setList([...newlist]))
@@ -78,10 +77,7 @@ export default function editUser() {
 
   return (
     <Main align="center">
-      <Flex w="full" justify="start" mt="2rem" mb="4rem">
-        <Heading>Dashboard</Heading>
-      </Flex>
-      <Flex w="50%">
+      <Flex w="50%" mt="1rem">
         <Flex
           as="form"
           direction="column"

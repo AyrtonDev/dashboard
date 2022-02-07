@@ -12,7 +12,7 @@ export function Main({ children, ...rest }: FlexProps) {
   const statusLog = cookie['STATUS']
   const list = useAppSelector((state) => state.list.users)
 
-  if (statusLog === 'logged') {
+  if (statusLog === 'logged' && list.length === 1) {
     getListUsers()
   }
 

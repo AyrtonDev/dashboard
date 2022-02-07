@@ -3,26 +3,13 @@ import { Button, Flex, Heading, Spinner } from '@chakra-ui/react'
 import { useAppSelector } from '../../redux/hooks/useAppSelector'
 import { TableBody, TableHeader } from '../../components/Table'
 import { useRouter } from 'next/router'
-import { destroyCookie } from 'nookies'
 
 export default function Dash() {
   const route = useRouter()
   const list = useAppSelector((state) => state.list.users)
 
-  const logOut = () => {
-    destroyCookie(undefined, 'STATUS')
-    localStorage.clear()
-    route.reload()
-  }
-
   return (
-    <Main>
-      <Flex w="full" justify="space-between" mt="2rem" mb="4rem">
-        <Heading>Dashboard</Heading>
-        <Button colorScheme="red" w="100px" onClick={logOut}>
-          Log out
-        </Button>
-      </Flex>
+    <Main mt="2rem">
       <Flex
         w="full"
         direction="column"

@@ -1,4 +1,4 @@
-import { Box, Flex, Icon } from '@chakra-ui/react'
+import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useAppSelector } from '../../redux/hooks/useAppSelector'
 import { useDispatch } from 'react-redux'
@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react'
 export function TableHeader() {
   const dispatch = useDispatch()
   const list = useAppSelector((state) => state.list.users)
+  const tableBg = useColorModeValue('gray.300', 'gray.700')
+
   const [order, setOrder] = useState(1)
   const [arraySort, setArraySort] = useState<userProps[] | null>(null)
 
@@ -31,7 +33,7 @@ export function TableHeader() {
     <Flex
       w="full"
       py="2rem"
-      bgColor="gray.200"
+      bgColor={tableBg}
       mt="2rem"
       border="2px solid"
       borderColor="gray.300"

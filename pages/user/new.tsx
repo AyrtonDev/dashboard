@@ -1,7 +1,6 @@
 import {
   Flex,
   FormLabel,
-  Heading,
   Input,
   Button,
   useToast
@@ -13,8 +12,6 @@ import { userProps } from '../../types/user'
 import { useAppSelector } from '../../redux/hooks/useAppSelector'
 import { setList } from '../../redux/reducers/listUserReducer'
 import { useDispatch } from 'react-redux'
-import { putListUsers } from '../../hooks/usePutListUsers'
-import axios from 'axios'
 
 const basic = {
   id: '',
@@ -46,7 +43,7 @@ export default function newUser() {
     route.push('/dash')
   }
 
-  const submitForm = async () => {
+  const submitForm = () => {
     if (list) {
       if (newUser.name.length === 0) {
         toast({
@@ -71,34 +68,9 @@ export default function newUser() {
             { ...newUser, id: (listUser.length + 1).toString() }
           ])
 
-        await dispatch(setList([...list, { ...newUser, id: list.length + 1 }]))
+        dispatch(setList([...list, { ...newUser, id: list.length + 1 }]))
 
         route.push('/dash')
-
-        await axios
-          .post(
-            'https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data',
-            newUser
-          )
-          .then((response) => console.log(response))
-        // await console.log('Dados antes de enviar: ', listUser)
-
-        // await console.log('Dados json: ', JSON.stringify(listUser))
-
-        // await console.log('Dados json obj: ', JSON.stringify({ listUser }))
-
-        // await fetch(
-        //   'https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data',
-        //   {
-        //     method: 'POST',
-        //     body: JSON.stringify(listUser),
-        //     headers: {
-        //       'Content-type': 'application/json; charset=UTF-8'
-        //     }
-        //   }
-        // )
-        //   .then((response) => response.json())
-        //   .then((json) => console.log(json))
       }
     } else {
       toast({
@@ -113,10 +85,7 @@ export default function newUser() {
 
   return (
     <Main align="center">
-      <Flex w="full" justify="start" mt="2rem" mb="4rem">
-        <Heading onClick={() => console.log(list)}>New user</Heading>
-      </Flex>
-      <Flex w="50%">
+      <Flex w="50%" mt="1rem">
         <Flex
           as="form"
           direction="column"
